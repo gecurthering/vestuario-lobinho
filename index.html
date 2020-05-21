@@ -20,7 +20,10 @@
 */
 
 // Create our application instance
-const app = new PIXI.Application({ backgroundColor: 0x1099bb });
+const app = new PIXI.Application({
+    width: window.innerWidth,
+    height: window.innerHeight,
+    backgroundColor: 0x2c3e50});
 document.body.appendChild(app.view);
 
 // create a texture from an image path
@@ -50,7 +53,7 @@ function createBunny(x, y) {
     bunny.anchor.set(0.5);
 
     // make it a bit bigger, so it's easier to grab
-    bunny.scale.set(3);
+    bunny.scale.set(1);
 
     // setup events for mouse + touch using
     // the pointer events
