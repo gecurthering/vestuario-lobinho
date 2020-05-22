@@ -33,11 +33,12 @@ app.loader
 
 function setup() {
     let meiofigure = new PIXI.Sprite(app.loader.resources.meiofigure.texture);
+    meiofigure.scale.set(2);
     meiofigure.anchor.set(0.5);
     meiofigure.x = app.renderer.width / 2;
     meiofigure.y = app.renderer.height / 2;
     let di1 = new PIXI.Sprite(app.loader.resources.di1.texture);
-    di1.scale.set(0.1);
+    di1.scale.set(0.2);
     di1.anchor.set(0.5);
     di1.interactive = true;
     di1.cursor = 'grab';
