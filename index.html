@@ -31,7 +31,11 @@ app.loader
     .add('feliz', 'https://vsolymossy.github.io/fluffy-guacamole/meiofigurefeliz.png')
     .add('triste', 'https://vsolymossy.github.io/fluffy-guacamole/meiofiguretriste.png')
     .add('di_wosm', 'https://vsolymossy.github.io/fluffy-guacamole/wosm.PNG')
-    .add('di_55sp', 'https://vsolymossy.github.io/fluffy-guacamole/55sp.png')    
+    .add('di_55sp', 'https://vsolymossy.github.io/fluffy-guacamole/55sp.png')
+    .add('di_ueb', 'https://vsolymossy.github.io/fluffy-guacamole/ueb.png')
+    .add('di_intesp', 'https://vsolymossy.github.io/fluffy-guacamole/int_esp.png')
+    .add('di_pata', 'https://vsolymossy.github.io/fluffy-guacamole/pata-tenra.png')
+    .add('di_matilha', 'https://vsolymossy.github.io/fluffy-guacamole/matilha.png')
     .load(setup);
 
 function setup() {
@@ -46,10 +50,11 @@ app.stage.addChild(meiofigure);
 app.stage.addChild(rosto);
 
 fase(nivel);
-//app.ticker.add(fase1)
+
 }
 
 function fase(nivel) {
+
     switch(nivel){
     
     case 1:
@@ -85,7 +90,6 @@ function fase(nivel) {
     di2.cursor = 'grab';
     di2.x=100;
     di2.y=100;
-
     texto2 = new PIXI.Text('Listel da Região e Numeral do Grupo');
     texto2.x = 50;
     texto2.y = 30;
@@ -100,22 +104,94 @@ function fase(nivel) {
 
     case 3:
     app.stage.removeChild(texto2);
-    xcerto=575;
-    ycerto=577;
-    let di3 = new PIXI.Sprite.from(app.loader.resources.di_pro.texture);
-    di3.scale.set(0.18);
+    xcerto=344;
+    ycerto=530;
+    let di3 = new PIXI.Sprite.from(app.loader.resources.di_ueb.texture);
+    di3.scale.set(0.12);
     di3.anchor.set(0.5);
     di3.interactive = true;
     di3.cursor = 'grab';
     di3.x=100;
     di3.y=100;
 
-    texto3 = new PIXI.Text('Distintivo de Promessa');
+    texto3 = new PIXI.Text('Distintivo Escoteiros do Brasil');
     texto3.x = 50;
     texto3.y = 30;
     app.stage.addChild(texto3);
     app.stage.addChild(di3);
     di3
+        .on('pointerdown', onDragStart)
+        .on('pointerup', onDragEnd)
+        .on('pointerupoutside', onDragEnd)
+        .on('pointermove', onDragMove);
+    break;
+
+    case 4:
+    app.stage.removeChild(texto3);
+    xcerto=575;
+    ycerto=577;
+    let di4 = new PIXI.Sprite.from(app.loader.resources.di_pro.texture);
+    di4.scale.set(0.18);
+    di4.anchor.set(0.5);
+    di4.interactive = true;
+    di4.cursor = 'grab';
+    di4.x=100;
+    di4.y=100;
+
+    texto4 = new PIXI.Text('Distintivo de Promessa');
+    texto4.x = 50;
+    texto4.y = 30;
+    app.stage.addChild(texto4);
+    app.stage.addChild(di4);
+    di4
+        .on('pointerdown', onDragStart)
+        .on('pointerup', onDragEnd)
+        .on('pointerupoutside', onDragEnd)
+        .on('pointermove', onDragMove);
+    break;
+
+    case 5:
+    app.stage.removeChild(texto4);
+    xcerto=730;
+    ycerto=520;
+    let di5 = new PIXI.Sprite.from(app.loader.resources.di_matilha.texture);
+    di5.scale.set(0.15);
+    di5.anchor.set(0.5);
+    di5.interactive = true;
+    di5.cursor = 'grab';
+    di5.x=100;
+    di5.y=100;
+
+    texto5 = new PIXI.Text('Distintivo da Matilha');
+    texto5.x = 50;
+    texto5.y = 30;
+    app.stage.addChild(texto5);
+    app.stage.addChild(di5);
+    di5
+        .on('pointerdown', onDragStart)
+        .on('pointerup', onDragEnd)
+        .on('pointerupoutside', onDragEnd)
+        .on('pointermove', onDragMove);
+    break;
+
+    case 6:
+    app.stage.removeChild(texto5);
+    xcerto=755;
+    ycerto=600;
+    let di6 = new PIXI.Sprite.from(app.loader.resources.di_pata.texture);
+    di6.scale.set(0.3);
+    di6.anchor.set(0.5);
+    di6.interactive = true;
+    di6.cursor = 'grab';
+    di6.x=100;
+    di6.y=100;
+
+    texto6 = new PIXI.Text('Distintivo de Progressão');
+    texto6.x = 50;
+    texto6.y = 30;
+    app.stage.addChild(texto6);
+    app.stage.addChild(di6);
+    di6
         .on('pointerdown', onDragStart)
         .on('pointerup', onDragEnd)
         .on('pointerupoutside', onDragEnd)
@@ -154,7 +230,6 @@ function onDragMove() {
 }
 
 function verificapos(xatual, yatual, objeto){
-
 if(xatual>xcerto-30 && xatual<xcerto+30 && yatual>ycerto-30 && yatual<ycerto+30){
     rosto.texture=app.loader.resources.feliz.texture;
     objeto.interactive=false;
@@ -166,53 +241,7 @@ if(xatual>xcerto-30 && xatual<xcerto+30 && yatual>ycerto-30 && yatual<ycerto+30)
     rosto.texture=app.loader.resources.triste.texture;
     }
 return
-
-}
-
-
-function onDragStart(event) {
-    // store a reference to the data
-    // the reason for this is because of multitouch
-    // we want to track the movement of this particular touch
-    this.data = event.data;
-    this.alpha = 0.5;
-    this.dragging = true;
-}
-
-function onDragEnd() {
-    this.alpha = 1;
-    this.dragging = false;
-    // set the interaction data to null
-    this.data = null;
-    
-     verificapos(this.x, this.y, this);
-       
-}
-
-function onDragMove() {
-    if (this.dragging) {
-        const newPosition = this.data.getLocalPosition(this.parent);
-        this.x = newPosition.x;
-        this.y = newPosition.y;
-    }
-}
-
-function verificapos(xatual, yatual, objeto){
-
-if(xatual>xcerto-30 && xatual<xcerto+30 && yatual>ycerto-30 && yatual<ycerto+30){
-    rosto.texture=app.loader.resources.feliz.texture;
-    objeto.interactive=false;
-    objeto.x=xcerto;
-    objeto.y=ycerto;
-    nivel=nivel+1;
-    fase(nivel);
-    }else{
-    rosto.texture=app.loader.resources.triste.texture;
-    }
-return
-
-}
-    
+}    
 </script>
 </body>
 </html>
