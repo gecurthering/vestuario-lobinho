@@ -15,8 +15,9 @@
 //Create a Pixi Application
 
 let rosto;
-var xcerto;
-var ycerto;
+
+var xcerto, ycerto, nivel;
+nivel=1;
 
 let app = new PIXI.Application({
     width: window.innerWidth,
@@ -27,9 +28,10 @@ document.body.appendChild(app.view);
 
 app.loader
     .add('meiofigure', 'https://vsolymossy.github.io/fluffy-guacamole/meiofigure.png')
-    .add('di1', 'https://vsolymossy.github.io/fluffy-guacamole/dist_promessa_lobinho.png')
+    .add('di_pro', 'https://vsolymossy.github.io/fluffy-guacamole/dist_promessa_lobinho.png')
     .add('feliz', 'https://vsolymossy.github.io/fluffy-guacamole/meiofigurefeliz.png')
     .add('triste', 'https://vsolymossy.github.io/fluffy-guacamole/meiofiguretriste.png')
+    .add('di_wosm', 'https://vsolymossy.github.io/fluffy-guacamole/wosm.PNG')
     .load(setup);
 
 function setup() {
@@ -37,48 +39,65 @@ function setup() {
     let meiofigure = new PIXI.Sprite.from(app.loader.resources.meiofigure.texture);
     meiofigure.scale.set(3);
     
-    rosto = new PIXI.Sprite.from(app.loader.resources.triste.texture);
+    rosto = new PIXI.Sprite.from(app.loader.resources.feliz.texture);
     rosto.scale.set(3);
-
-//    let feliz = new PIXI.Sprite(app.loader.resources.feliz.texture);
-//    feliz.scale.set(3);
-//    feliz.visible = false;
 
 app.stage.addChild(meiofigure);
 app.stage.addChild(rosto);
 
-fase1();
-
+fase(nivel);
+//app.ticker.add(fase1)
 }
 
-function fase1() {
-
-    xcerto=570;
-    ycerto=570;
-
-    let di1 = new PIXI.Sprite.from(app.loader.resources.di1.texture);
+function fase(nivel) {
+    switch(nivel){
+    case 1:
+    xcerto=575;
+    ycerto=577;
+    let di1 = new PIXI.Sprite.from(app.loader.resources.di_pro.texture);
     di1.scale.set(0.25);
     di1.anchor.set(0.5);
     di1.interactive = true;
     di1.cursor = 'grab';
     di1.x=100;
     di1.y=100;
+    //const basicText = new PIXI.Text('Distintivo de Promessa');
+    //basicText.x = 50;
+    //basicText.y = 30;
+    //app.stage.addChild(basicText);
+    app.stage.addChild(di1);
     di1
         .on('pointerdown', onDragStart)
         .on('pointerup', onDragEnd)
         .on('pointerupoutside', onDragEnd)
         .on('pointermove', onDragMove);
-    
-    const basicText = new PIXI.Text('Distintivo de Promessa');
-    basicText.x = 50;
-    basicText.y = 30;
-    app.stage.addChild(basicText);
-
-app.stage.addChild(di1);
-
-
-
+    break;
+    case 2:
+    xcerto=570;
+    ycerto=450;
+    let di2 = new PIXI.Sprite.from(app.loader.resources.di_wosm.texture);
+    di2.scale.set(0.25);
+    di2.anchor.set(0.5);
+    di2.interactive = true;
+    di2.cursor = 'grab';
+    di2.x=100;
+    di2.y=100;
+    //const basicText2 = new PIXI.Text('Distintivo da WOSM');
+    //basicText2.x = 50;
+    //basicText2.y = 30;
+    //app.stage.addChild(basicText2);
+    app.stage.addChild(di2);
+    di2
+        .on('pointerdown', onDragStart)
+        .on('pointerup', onDragEnd)
+        .on('pointerupoutside', onDragEnd)
+        .on('pointermove', onDragMove);
+    break;
+    }
 }
+
+
+
 function onDragStart(event) {
     // store a reference to the data
     // the reason for this is because of multitouch
@@ -94,7 +113,7 @@ function onDragEnd() {
     // set the interaction data to null
     this.data = null;
     
-     verificapos(this.x, this.y);
+     verificapos(this.x, this.y, this);
        
 }
 
@@ -104,6 +123,22 @@ function onDragMove() {
         this.x = newPosition.x;
         this.y = newPosition.y;
     }
+}
+
+function verificapos(xatual, yatual, objeto){
+
+if(xatual>xcerto-30 && xatual<xcerto+30 && yatual>ycerto-30 && yatual<ycerto+30){
+    rosto.texture=app.loader.resources.feliz.texture;
+    objeto.interactive=false;
+    objeto.x=xcerto;
+    objeto.y=ycerto;
+    nivel=nivel+1;
+    fase(nivel);
+    }else{
+    rosto.texture=app.loader.resources.triste.texture;
+    }
+return
+
 }
 
 function verificapos(xatual, yatual){
