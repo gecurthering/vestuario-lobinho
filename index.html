@@ -31,6 +31,7 @@ app.loader
     .add('feliz', 'https://vsolymossy.github.io/fluffy-guacamole/meiofigurefeliz.png')
     .add('triste', 'https://vsolymossy.github.io/fluffy-guacamole/meiofiguretriste.png')
     .add('di_wosm', 'https://vsolymossy.github.io/fluffy-guacamole/wosm.PNG')
+    .add('di_55sp', 'https://vsolymossy.github.io/fluffy-guacamole/55sp.png')    
     .load(setup);
 
 function setup() {
@@ -54,20 +55,41 @@ function fase(nivel) {
     case 1:
     xcerto=570;
     ycerto=450;
-    let di2 = new PIXI.Sprite.from(app.loader.resources.di_wosm.texture);
-    di2.scale.set(0.20);
+    let di1 = new PIXI.Sprite.from(app.loader.resources.di_wosm.texture);
+    di1.scale.set(0.20);
+    di1.anchor.set(0.5);
+    di1.interactive = true;
+    di1.cursor = 'grab';
+    di1.x=100;
+    di1.y=100;
+    texto1 = new PIXI.Text('Distintivo da WOSM');
+    texto1.x = 50;
+    texto1.y = 30;
+    app.stage.addChild(texto1);
+    app.stage.addChild(di1);
+    di1
+        .on('pointerdown', onDragStart)
+        .on('pointerup', onDragEnd)
+        .on('pointerupoutside', onDragEnd)
+        .on('pointermove', onDragMove);
+    break;
+
+    case 2:
+    app.stage.removeChild(texto1);
+    xcerto=185;
+    ycerto=540;
+    let di2 = new PIXI.Sprite.from(app.loader.resources.di_55sp.texture);
+    di2.scale.set(0.11);
     di2.anchor.set(0.5);
     di2.interactive = true;
     di2.cursor = 'grab';
     di2.x=100;
     di2.y=100;
 
-
-
-    texto = new PIXI.Text('Distintivo da WOSM');
-    texto.x = 50;
-    texto.y = 30;
-    app.stage.addChild(texto);
+    texto2 = new PIXI.Text('Listel da Região e Numeral do Grupo');
+    texto2.x = 50;
+    texto2.y = 30;
+    app.stage.addChild(texto2);
     app.stage.addChild(di2);
     di2
         .on('pointerdown', onDragStart)
@@ -76,24 +98,24 @@ function fase(nivel) {
         .on('pointermove', onDragMove);
     break;
 
-    case 2:
-    app.stage.removeChild(texto);
+    case 3:
+    app.stage.removeChild(texto2);
     xcerto=575;
     ycerto=577;
-    let di1 = new PIXI.Sprite.from(app.loader.resources.di_pro.texture);
-    di1.scale.set(0.18);
-    di1.anchor.set(0.5);
-    di1.interactive = true;
-    di1.cursor = 'grab';
-    di1.x=100;
-    di1.y=100;
+    let di3 = new PIXI.Sprite.from(app.loader.resources.di_pro.texture);
+    di3.scale.set(0.18);
+    di3.anchor.set(0.5);
+    di3.interactive = true;
+    di3.cursor = 'grab';
+    di3.x=100;
+    di3.y=100;
 
-    texto2 = new PIXI.Text('Distintivo de Promessa');
-    texto2.x = 50;
-    texto2.y = 30;
-    app.stage.addChild(texto2);
-    app.stage.addChild(di1);
-    di1
+    texto3 = new PIXI.Text('Distintivo de Promessa');
+    texto3.x = 50;
+    texto3.y = 30;
+    app.stage.addChild(texto3);
+    app.stage.addChild(di3);
+    di3
         .on('pointerdown', onDragStart)
         .on('pointerup', onDragEnd)
         .on('pointerupoutside', onDragEnd)
@@ -102,6 +124,50 @@ function fase(nivel) {
     }
 }
 
+
+
+function onDragStart(event) {
+    // store a reference to the data
+    // the reason for this is because of multitouch
+    // we want to track the movement of this particular touch
+    this.data = event.data;
+    this.alpha = 0.5;
+    this.dragging = true;
+}
+
+function onDragEnd() {
+    this.alpha = 1;
+    this.dragging = false;
+    // set the interaction data to null
+    this.data = null;
+    
+     verificapos(this.x, this.y, this);
+       
+}
+
+function onDragMove() {
+    if (this.dragging) {
+        const newPosition = this.data.getLocalPosition(this.parent);
+        this.x = newPosition.x;
+        this.y = newPosition.y;
+    }
+}
+
+function verificapos(xatual, yatual, objeto){
+
+if(xatual>xcerto-30 && xatual<xcerto+30 && yatual>ycerto-30 && yatual<ycerto+30){
+    rosto.texture=app.loader.resources.feliz.texture;
+    objeto.interactive=false;
+    objeto.x=xcerto;
+    objeto.y=ycerto;
+    nivel=nivel+1;
+    fase(nivel);
+    }else{
+    rosto.texture=app.loader.resources.triste.texture;
+    }
+return
+
+}
 
 
 function onDragStart(event) {
