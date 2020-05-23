@@ -12,13 +12,12 @@
       type = "canvas"
     }
 
-  /**
-* This is the default playground.
-* You should see a bunny spinning in the right preview pane.
-* Feel free to use this as a starting point for you own playground!
-*/
-
 //Create a Pixi Application
+
+let rosto;
+var xcerto;
+var ycerto;
+
 let app = new PIXI.Application({
     width: window.innerWidth,
     height: window.innerHeight,
@@ -28,17 +27,37 @@ document.body.appendChild(app.view);
 
 app.loader
     .add('meiofigure', 'https://vsolymossy.github.io/fluffy-guacamole/meiofigure.png')
-    .add('di1', 'https://vsolymossy.github.io/fluffy-guacamole/D_CT_1.png')
+    .add('di1', 'https://vsolymossy.github.io/fluffy-guacamole/dist_promessa_lobinho.png')
+    .add('feliz', 'https://vsolymossy.github.io/fluffy-guacamole/meiofigurefeliz.png')
+    .add('triste', 'https://vsolymossy.github.io/fluffy-guacamole/meiofiguretriste.png')
     .load(setup);
 
 function setup() {
-    let meiofigure = new PIXI.Sprite(app.loader.resources.meiofigure.texture);
+
+    let meiofigure = new PIXI.Sprite.from(app.loader.resources.meiofigure.texture);
     meiofigure.scale.set(3);
-    meiofigure.anchor.set(0.5);
-    meiofigure.x = app.renderer.width / 2;
-    meiofigure.y = app.renderer.height / 2;
-    let di1 = new PIXI.Sprite(app.loader.resources.di1.texture);
-    di1.scale.set(0.3);
+    
+    rosto = new PIXI.Sprite.from(app.loader.resources.triste.texture);
+    rosto.scale.set(3);
+
+//    let feliz = new PIXI.Sprite(app.loader.resources.feliz.texture);
+//    feliz.scale.set(3);
+//    feliz.visible = false;
+
+app.stage.addChild(meiofigure);
+app.stage.addChild(rosto);
+
+fase1();
+
+}
+
+function fase1() {
+
+    xcerto=570;
+    ycerto=570;
+
+    let di1 = new PIXI.Sprite.from(app.loader.resources.di1.texture);
+    di1.scale.set(0.25);
     di1.anchor.set(0.5);
     di1.interactive = true;
     di1.cursor = 'grab';
@@ -49,15 +68,17 @@ function setup() {
         .on('pointerup', onDragEnd)
         .on('pointerupoutside', onDragEnd)
         .on('pointermove', onDragMove);
-    // move the sprite to its designated position
-//    di1.x = x;
-//    di1.y = y;
     
-// Ficará por cima o sprite adicionado por último
-app.stage.addChild(meiofigure);
-app.stage.addChild(di1);
-}
+    const basicText = new PIXI.Text('Distintivo de Promessa');
+    basicText.x = 50;
+    basicText.y = 30;
+    app.stage.addChild(basicText);
 
+app.stage.addChild(di1);
+
+
+
+}
 function onDragStart(event) {
     // store a reference to the data
     // the reason for this is because of multitouch
@@ -72,6 +93,9 @@ function onDragEnd() {
     this.dragging = false;
     // set the interaction data to null
     this.data = null;
+    
+     verificapos(this.x, this.y);
+       
 }
 
 function onDragMove() {
@@ -80,6 +104,16 @@ function onDragMove() {
         this.x = newPosition.x;
         this.y = newPosition.y;
     }
+}
+
+function verificapos(xatual, yatual){
+
+if(xatual>xcerto){
+    rosto.texture=app.loader.resources.feliz.texture;
+    }else{
+    rosto.texture=app.loader.resources.triste.texture;
+    }
+
 }
     
 </script>
