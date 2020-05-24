@@ -203,7 +203,7 @@ let di6;
     di7.cursor = 'grab';
     di7.x=100;
     di7.y=100;
-    texto1 = new PIXI.Text('Habilidades Escoteiras e Serviços');
+    texto1 = new PIXI.Text('Ciências e Tecnologia, Cultura e Desportos');
     texto1.x = 50;
     texto1.y = 30;
     app.stage.addChild(texto1);
@@ -232,7 +232,7 @@ let di6;
     di8.cursor = 'grab';
     di8.x=100;
     di8.y=100;
-    texto1 = new PIXI.Text('Ciências e Tecnologia, Cultura e Desportos');
+    texto1 = new PIXI.Text('Habilidades Escoteiras e Serviços');
     texto1.x = 50;
     texto1.y = 30;
     app.stage.addChild(texto1);
@@ -340,7 +340,7 @@ function onDragMove() {
 }
 
 function verificapos(xatual, yatual, objeto){
-if(xatual>xcerto-40 && xatual<xcerto+40 && yatual>ycerto-40 && yatual<ycerto+40){
+if(xatual>xcerto-50 && xatual<xcerto+50 && yatual>ycerto-50 && yatual<ycerto+50){
     rosto.texture=app.loader.resources.feliz.texture;
     objeto.interactive=false;
     objeto.scale.set(1);
