@@ -8,7 +8,8 @@
 <body>
 <center>
 <H1>Jogo do Vestuário do Lobinho</H1>
-<H2>Ajude o lobinho a encontrar o local correto de seus distintivos em seu uniforme, arrastando-os para o lugar correto.</H2>
+  Você já <a href="https://www.youtube.com/watch?v=Lao-jfqabd4">assistiu o vídeo</a> sobre Vestuário e Distintivos Lobinho, da Chefe Ana Paula?<P>
+<H2>Agora, ajude o lobinho a encontrar o local correto de seus distintivos em seu uniforme, arrastando-os para o lugar correto.</H2>
 
   <script type="text/javascript">
     let type = "WebGL"
@@ -30,21 +31,21 @@ let app = new PIXI.Application({
 document.body.appendChild(app.view);
 
 app.loader
-    .add('meiofigure', 'images/meiofigure.png')
-    .add('di_pro', 'images/promessa_lobinho.png')
-    .add('feliz', 'images/meiofigurefeliz.png')
-    .add('triste', 'images/meiofiguretriste.png')
-    .add('di_wosm', 'images/wosm.png')
-    .add('di_55sp', 'images/55sp.png')
-    .add('di_ueb', 'images/ueb.png')
-    .add('di_intesp', 'images/int_esp.png')
-    .add('di_pata', 'images/pata-tenra.png')
-    .add('di_matilha', 'images/matilha.png')
-    .add('di_saltador', 'images/saltador.png')
-    .add('di_rastreador', 'images/restreador.png')
-    .add('di_cacador', 'images/cacador.png')
-    .add('di_csul', 'images/cruzeiro.png')
-    .add('di_esps', 'images/3esps.png')
+    .add('meiofigure', 'https://vsolymossy.github.io/vestuario-lobinho/images/meiofigure.png')
+    .add('di_pro', 'https://vsolymossy.github.io/vestuario-lobinho/images/promessa_lobinho.png')
+    .add('feliz', 'https://vsolymossy.github.io/vestuario-lobinho/images/meiofigurefeliz.png')
+    .add('triste', 'https://vsolymossy.github.io/vestuario-lobinho/images/meiofiguretriste.png')
+    .add('di_wosm', 'https://vsolymossy.github.io/vestuario-lobinho/images/wosm.png')
+    .add('di_55sp', 'https://vsolymossy.github.io/vestuario-lobinho/images/55sp.png')
+    .add('di_ueb', 'https://vsolymossy.github.io/vestuario-lobinho/images/ueb.png')
+    .add('di_intesp', 'https://vsolymossy.github.io/vestuario-lobinho/images/int_esp.png')
+    .add('di_pata', 'https://vsolymossy.github.io/vestuario-lobinho/images/pata-tenra.png')
+    .add('di_matilha', 'https://vsolymossy.github.io/vestuario-lobinho/images/matilha.png')
+    .add('di_saltador', 'https://vsolymossy.github.io/vestuario-lobinho/images/saltador.png')
+    .add('di_rastreador', 'https://vsolymossy.github.io/vestuario-lobinho/images/restreador.png')
+    .add('di_cacador', 'https://vsolymossy.github.io/vestuario-lobinho/images/cacador.png')
+    .add('di_csul', 'https://vsolymossy.github.io/vestuario-lobinho/images/cruzeiro.png')
+    .add('di_esps', 'https://vsolymossy.github.io/vestuario-lobinho/images/3esps.png')
     .load(setup);
 
 function setup() {
@@ -67,10 +68,11 @@ let di6;
     switch(nivel){
     
     case 1:
-    xcerto=538;
-    ycerto=419;
+    xcerto=573;
+    ycerto=453;
     let di1 = new PIXI.Sprite.from(app.loader.resources.di_wosm.texture);
     di1.scale.set(1.3);
+    di1.anchor.set(0.5);
     di1.interactive = true;
     di1.cursor = 'grab';
     di1.x=100;
@@ -89,10 +91,11 @@ let di6;
 
     case 2:
     app.stage.removeChild(texto1);
-    xcerto=101;
-    ycerto=471;
+    xcerto=180;
+    ycerto=519;
     let di2 = new PIXI.Sprite.from(app.loader.resources.di_55sp.texture);
     di2.scale.set(1.3);
+    di2.anchor.set(0.5);
     di2.interactive = true;
     di2.cursor = 'grab';
     di2.x=100;
@@ -111,10 +114,11 @@ let di6;
 
     case 3:
     app.stage.removeChild(texto1);
-    xcerto=283;
-    ycerto=557;
+    xcerto=343;
+    ycerto=568;
     let di3 = new PIXI.Sprite.from(app.loader.resources.di_ueb.texture);
     di3.scale.set(1.3);
+    di3.anchor.set(0.5);
     di3.interactive = true;
     di3.cursor = 'grab';
     di3.x=100;
@@ -133,10 +137,11 @@ let di6;
 
     case 4:
     app.stage.removeChild(texto1);
-    xcerto=545;
-    ycerto=570;
+    xcerto=574;
+    ycerto=608;
     let di4 = new PIXI.Sprite.from(app.loader.resources.di_pro.texture);
     di4.scale.set(1.3);
+    di4.anchor.set(0.5);
     di4.interactive = true;
     di4.cursor = 'grab';
     di4.x=100;
@@ -155,10 +160,11 @@ let di6;
 
     case 5:
     app.stage.removeChild(texto1);
-    xcerto=694;
-    ycerto=483;
+    xcerto=721;
+    ycerto=510;
     let di5 = new PIXI.Sprite.from(app.loader.resources.di_matilha.texture);
     di5.scale.set(1.3);
+    di5.anchor.set(0.5);
     di5.interactive = true;
     di5.cursor = 'grab';
     di5.x=100;
@@ -177,10 +183,11 @@ let di6;
 
     case 6:
     app.stage.removeChild(texto1);
-    xcerto=712;
-    ycerto=542;
+    xcerto=750;
+    ycerto=580;
     di6 = new PIXI.Sprite.from(app.loader.resources.di_pata.texture);
     di6.scale.set(1.3);
+    di6.anchor.set(0.5);
     di6.interactive = true;
     di6.cursor = 'grab';
     di6.x=100;
@@ -199,10 +206,11 @@ let di6;
 
     case 7:
     app.stage.removeChild(texto1);
-    xcerto=54;
-    ycerto=642;
+    xcerto=131;
+    ycerto=683;
     let di7 = new PIXI.Sprite.from(app.loader.resources.di_esps.texture);
     di7.scale.set(1.3);
+    di7.anchor.set(0.5);
     di7.interactive = true;
     di7.cursor = 'grab';
     di7.x=100;
@@ -221,9 +229,8 @@ let di6;
 
     case 8:
     app.stage.removeChild(texto1);
-    xcerto=704;
-    ycerto=631;
-    
+    xcerto=781;
+    ycerto=683;
     app.stage.removeChild(di6)
     di6 = new PIXI.Sprite.from(app.loader.resources.di_saltador.texture);
     di6.x=712;
@@ -232,6 +239,7 @@ let di6;
 
     let di8 = new PIXI.Sprite.from(app.loader.resources.di_esps.texture);
     di8.scale.set(1.3);
+    di8.anchor.set(0.5);
     di8.interactive = true;
     di8.cursor = 'grab';
     di8.x=100;
@@ -250,8 +258,8 @@ let di6;
 
     case 9:
     app.stage.removeChild(texto1);
-    xcerto=498;
-    ycerto=490;
+    xcerto=528;
+    ycerto=517;
 
 app.stage.removeChild(di6)
     di6 = new PIXI.Sprite.from(app.loader.resources.di_rastreador.texture);
@@ -261,6 +269,7 @@ app.stage.removeChild(di6)
 
     let di9 = new PIXI.Sprite.from(app.loader.resources.di_intesp.texture);
     di9.scale.set(1.3);
+    di9.anchor.set(0.5);
     di9.interactive = true;
     di9.cursor = 'grab';
     di9.x=100;
@@ -279,8 +288,8 @@ app.stage.removeChild(di6)
 
     case 10:
     app.stage.removeChild(texto1);
-    xcerto=117;
-    ycerto=571;
+    xcerto=151;
+    ycerto=605;
     app.stage.removeChild(di6)
     di6 = new PIXI.Sprite.from(app.loader.resources.di_cacador.texture);
     di6.x=712;
@@ -288,6 +297,7 @@ app.stage.removeChild(di6)
     app.stage.addChild(di6)
     let di10 = new PIXI.Sprite.from(app.loader.resources.di_csul.texture);
     di10.scale.set(1.3);
+    di10.anchor.set(0.5);
     di10.interactive = true;
     di10.cursor = 'grab';
     di10.x=100;
@@ -357,9 +367,10 @@ if(xatual>xcerto-50 && xatual<xcerto+50 && yatual>ycerto-50 && yatual<ycerto+50)
     }
 return
 }
-    
-    
 </script>
 </center>
+
+Antes de costurar seus distintivos, sempre confira com a Regra nº 45 do <a href="https://www.escoteiros.org.br/wp-content/uploads/2016/01/por.pdf>POR</a>.
+
 </body>
 </html>
