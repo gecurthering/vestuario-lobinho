@@ -9,27 +9,26 @@
 <center>
 <H1>Jogo do Vestuário do Lobinho</H1>
 <H2>Ajude o lobinho a encontrar o local correto de seus distintivos em seu uniforme, arrastando-os para o lugar correto.</H2>
+
   <script type="text/javascript">
     let type = "WebGL"
     if(!PIXI.utils.isWebGLSupported()){
       type = "canvas"
     }
+
 //Início da Pixi Application
 
-// Declarando as variáveis que serão utilizadas:
-// rosto - é utilizada com a textura do rosto, que mudará conforme a posição em que o distintivo é colocado.
-// xcerto e ycerto - são as variáveis que conterão as coordenadas corretas de cada distintivo (valores serão definidos em cada condição).
-// nivel - será utilizado para chamar a função fase. cada distintivo é uma fase.
 let rosto;
 var xcerto, ycerto, nivel;
 nivel=1;
-// Definindo o tamanho do stage para o tamanho do meiofigure.png
+
 let app = new PIXI.Application({
     width: 920,
     height: 1040,
     backgroundColor: 0xF0F0A0
     });
-// Carregando todas as texturas
+document.body.appendChild(app.view);
+
 app.loader
     .add('meiofigure', 'images/meiofigure.png')
     .add('di_pro', 'images/promessa_lobinho.png')
@@ -48,20 +47,25 @@ app.loader
     .add('di_esps', 'images/3esps.png')
     .load(setup);
 
-//Essa função "arruma" o cenário e chama a função fase com o valor nível (definido para um no inicio do código fonte).
 function setup() {
+
     let meiofigure = new PIXI.Sprite.from(app.loader.resources.meiofigure.texture);
     meiofigure.scale.set(1);
+    
     rosto = new PIXI.Sprite.from(app.loader.resources.feliz.texture);
     rosto.scale.set(1);
+
 app.stage.addChild(meiofigure);
 app.stage.addChild(rosto);
-// Início da função nível. O modo mais rápido foi utilizar um switch para cada valor possível de nivel.
+
 fase(nivel);
+
 }
+
 function fase(nivel) {
 let di6;
     switch(nivel){
+    
     case 1:
     xcerto=538;
     ycerto=419;
@@ -82,6 +86,7 @@ let di6;
         .on('pointerupoutside', onDragEnd)
         .on('pointermove', onDragMove);
     break;
+
     case 2:
     app.stage.removeChild(texto1);
     xcerto=101;
@@ -103,6 +108,7 @@ let di6;
         .on('pointerupoutside', onDragEnd)
         .on('pointermove', onDragMove);
     break;
+
     case 3:
     app.stage.removeChild(texto1);
     xcerto=283;
@@ -124,6 +130,7 @@ let di6;
         .on('pointerupoutside', onDragEnd)
         .on('pointermove', onDragMove);
     break;
+
     case 4:
     app.stage.removeChild(texto1);
     xcerto=545;
@@ -145,6 +152,7 @@ let di6;
         .on('pointerupoutside', onDragEnd)
         .on('pointermove', onDragMove);
     break;
+
     case 5:
     app.stage.removeChild(texto1);
     xcerto=694;
@@ -166,6 +174,7 @@ let di6;
         .on('pointerupoutside', onDragEnd)
         .on('pointermove', onDragMove);
     break;
+
     case 6:
     app.stage.removeChild(texto1);
     xcerto=712;
@@ -187,6 +196,7 @@ let di6;
         .on('pointerupoutside', onDragEnd)
         .on('pointermove', onDragMove);
     break;
+
     case 7:
     app.stage.removeChild(texto1);
     xcerto=54;
@@ -208,15 +218,18 @@ let di6;
         .on('pointerupoutside', onDragEnd)
         .on('pointermove', onDragMove);
     break;
+
     case 8:
     app.stage.removeChild(texto1);
     xcerto=704;
     ycerto=631;
+    
     app.stage.removeChild(di6)
     di6 = new PIXI.Sprite.from(app.loader.resources.di_saltador.texture);
     di6.x=712;
     di6.y=542;
     app.stage.addChild(di6)
+
     let di8 = new PIXI.Sprite.from(app.loader.resources.di_esps.texture);
     di8.scale.set(1.3);
     di8.interactive = true;
@@ -234,15 +247,18 @@ let di6;
         .on('pointerupoutside', onDragEnd)
         .on('pointermove', onDragMove);
     break;
+
     case 9:
     app.stage.removeChild(texto1);
     xcerto=498;
     ycerto=490;
-    app.stage.removeChild(di6)
+
+app.stage.removeChild(di6)
     di6 = new PIXI.Sprite.from(app.loader.resources.di_rastreador.texture);
     di6.x=712;
     di6.y=542;
     app.stage.addChild(di6)
+
     let di9 = new PIXI.Sprite.from(app.loader.resources.di_intesp.texture);
     di9.scale.set(1.3);
     di9.interactive = true;
@@ -260,6 +276,7 @@ let di6;
         .on('pointerupoutside', onDragEnd)
         .on('pointermove', onDragMove);
     break;
+
     case 10:
     app.stage.removeChild(texto1);
     xcerto=117;
@@ -286,6 +303,7 @@ let di6;
         .on('pointerupoutside', onDragEnd)
         .on('pointermove', onDragMove);
     break;
+
     case 11:
     app.stage.removeChild(texto1);
     texto1 = new PIXI.Text('Parabéns!');
@@ -295,7 +313,9 @@ let di6;
     break;
     }
 }
-// Abaixo estão as quatro funções de eventos do mouse.
+
+
+
 function onDragStart(event) {
     // store a reference to the data
     // the reason for this is because of multitouch
@@ -304,13 +324,17 @@ function onDragStart(event) {
     this.alpha = 0.5;
     this.dragging = true;
 }
+
 function onDragEnd() {
     this.alpha = 1;
     this.dragging = false;
     // set the interaction data to null
     this.data = null;
+    
      verificapos(this.x, this.y, this);
+       
 }
+
 function onDragMove() {
     if (this.dragging) {
         const newPosition = this.data.getLocalPosition(this.parent);
@@ -318,8 +342,7 @@ function onDragMove() {
         this.y = newPosition.y;
     }
 }
-// A função verificapois() é acionada sempre que termina um movimento de arrastar. Ela compara os valores atuais com os corretos.
-// Estando tudo certo, soma-se 1 à variável nível e se inicia a função fase().
+
 function verificapos(xatual, yatual, objeto){
 if(xatual>xcerto-50 && xatual<xcerto+50 && yatual>ycerto-50 && yatual<ycerto+50){
     rosto.texture=app.loader.resources.feliz.texture;
@@ -334,8 +357,9 @@ if(xatual>xcerto-50 && xatual<xcerto+50 && yatual>ycerto-50 && yatual<ycerto+50)
     }
 return
 }
+    
+    
 </script>
- 
 </center>
 </body>
 </html>
