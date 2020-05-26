@@ -1,0 +1,365 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Jogo do Vestuário do Lobinho</title>
+</head>
+  <script src="pixi.min.js"></script>
+<body>
+<center>
+<H1>Jogo do Vestuário do Lobinho</H1>
+Ajude o lobinho a encontrar o local correto de seus distintivos em seu uniforme, arrastando-os para o lugar correto.<p>
+
+  <script type="text/javascript">
+    let type = "WebGL"
+    if(!PIXI.utils.isWebGLSupported()){
+      type = "canvas"
+    }
+
+//Início da Pixi Application
+
+let rosto;
+var xcerto, ycerto, nivel;
+nivel=1;
+
+let app = new PIXI.Application({
+    width: 920,
+    height: 1040,
+    backgroundColor: 0xF0F0A0
+    });
+document.body.appendChild(app.view);
+
+app.loader
+    .add('meiofigure', 'images/meiofigure.png')
+    .add('di_pro', 'images/promessa_lobinho.png')
+    .add('feliz', 'images/meiofigurefeliz.png')
+    .add('triste', 'images/meiofiguretriste.png')
+    .add('di_wosm', 'images/wosm.png')
+    .add('di_55sp', 'images/55sp.png')
+    .add('di_ueb', 'images/ueb.png')
+    .add('di_intesp', 'images/int_esp.png')
+    .add('di_pata', 'images/pata-tenra.png')
+    .add('di_matilha', 'images/matilha.png')
+    .add('di_saltador', 'images/saltador.png')
+    .add('di_rastreador', 'images/restreador.png')
+    .add('di_cacador', 'images/cacador.png')
+    .add('di_csul', 'images/cruzeiro.png')
+    .add('di_esps', 'images/3esps.png')
+    .load(setup);
+
+function setup() {
+
+    let meiofigure = new PIXI.Sprite.from(app.loader.resources.meiofigure.texture);
+    meiofigure.scale.set(1);
+    
+    rosto = new PIXI.Sprite.from(app.loader.resources.feliz.texture);
+    rosto.scale.set(1);
+
+app.stage.addChild(meiofigure);
+app.stage.addChild(rosto);
+
+fase(nivel);
+
+}
+
+function fase(nivel) {
+let di6;
+    switch(nivel){
+    
+    case 1:
+    xcerto=538;
+    ycerto=419;
+    let di1 = new PIXI.Sprite.from(app.loader.resources.di_wosm.texture);
+    di1.scale.set(1.3);
+    di1.interactive = true;
+    di1.cursor = 'grab';
+    di1.x=100;
+    di1.y=100;
+    texto1 = new PIXI.Text('Distintivo da WOSM');
+    texto1.x = 50;
+    texto1.y = 30;
+    app.stage.addChild(texto1);
+    app.stage.addChild(di1);
+    di1
+        .on('pointerdown', onDragStart)
+        .on('pointerup', onDragEnd)
+        .on('pointerupoutside', onDragEnd)
+        .on('pointermove', onDragMove);
+    break;
+
+    case 2:
+    app.stage.removeChild(texto1);
+    xcerto=101;
+    ycerto=471;
+    let di2 = new PIXI.Sprite.from(app.loader.resources.di_55sp.texture);
+    di2.scale.set(1.3);
+    di2.interactive = true;
+    di2.cursor = 'grab';
+    di2.x=100;
+    di2.y=100;
+    texto1 = new PIXI.Text('Listel da Região e Numeral do Grupo');
+    texto1.x = 50;
+    texto1.y = 30;
+    app.stage.addChild(texto1);
+    app.stage.addChild(di2);
+    di2
+        .on('pointerdown', onDragStart)
+        .on('pointerup', onDragEnd)
+        .on('pointerupoutside', onDragEnd)
+        .on('pointermove', onDragMove);
+    break;
+
+    case 3:
+    app.stage.removeChild(texto1);
+    xcerto=283;
+    ycerto=557;
+    let di3 = new PIXI.Sprite.from(app.loader.resources.di_ueb.texture);
+    di3.scale.set(1.3);
+    di3.interactive = true;
+    di3.cursor = 'grab';
+    di3.x=100;
+    di3.y=100;
+    texto1 = new PIXI.Text('Distintivo Escoteiros do Brasil');
+    texto1.x = 50;
+    texto1.y = 30;
+    app.stage.addChild(texto1);
+    app.stage.addChild(di3);
+    di3
+        .on('pointerdown', onDragStart)
+        .on('pointerup', onDragEnd)
+        .on('pointerupoutside', onDragEnd)
+        .on('pointermove', onDragMove);
+    break;
+
+    case 4:
+    app.stage.removeChild(texto1);
+    xcerto=545;
+    ycerto=570;
+    let di4 = new PIXI.Sprite.from(app.loader.resources.di_pro.texture);
+    di4.scale.set(1.3);
+    di4.interactive = true;
+    di4.cursor = 'grab';
+    di4.x=100;
+    di4.y=100;
+    texto1 = new PIXI.Text('Distintivo de Promessa');
+    texto1.x = 50;
+    texto1.y = 30;
+    app.stage.addChild(texto1);
+    app.stage.addChild(di4);
+    di4
+        .on('pointerdown', onDragStart)
+        .on('pointerup', onDragEnd)
+        .on('pointerupoutside', onDragEnd)
+        .on('pointermove', onDragMove);
+    break;
+
+    case 5:
+    app.stage.removeChild(texto1);
+    xcerto=694;
+    ycerto=483;
+    let di5 = new PIXI.Sprite.from(app.loader.resources.di_matilha.texture);
+    di5.scale.set(1.3);
+    di5.interactive = true;
+    di5.cursor = 'grab';
+    di5.x=100;
+    di5.y=100;
+    texto1 = new PIXI.Text('Distintivo da Matilha');
+    texto1.x = 50;
+    texto1.y = 30;
+    app.stage.addChild(texto1);
+    app.stage.addChild(di5);
+    di5
+        .on('pointerdown', onDragStart)
+        .on('pointerup', onDragEnd)
+        .on('pointerupoutside', onDragEnd)
+        .on('pointermove', onDragMove);
+    break;
+
+    case 6:
+    app.stage.removeChild(texto1);
+    xcerto=712;
+    ycerto=542;
+    di6 = new PIXI.Sprite.from(app.loader.resources.di_pata.texture);
+    di6.scale.set(1.3);
+    di6.interactive = true;
+    di6.cursor = 'grab';
+    di6.x=100;
+    di6.y=100;
+    texto1 = new PIXI.Text('Distintivo de Progressão');
+    texto1.x = 50;
+    texto1.y = 30;
+    app.stage.addChild(texto1);
+    app.stage.addChild(di6);
+    di6
+        .on('pointerdown', onDragStart)
+        .on('pointerup', onDragEnd)
+        .on('pointerupoutside', onDragEnd)
+        .on('pointermove', onDragMove);
+    break;
+
+    case 7:
+    app.stage.removeChild(texto1);
+    xcerto=54;
+    ycerto=642;
+    let di7 = new PIXI.Sprite.from(app.loader.resources.di_esps.texture);
+    di7.scale.set(1.3);
+    di7.interactive = true;
+    di7.cursor = 'grab';
+    di7.x=100;
+    di7.y=100;
+    texto1 = new PIXI.Text('Ciências e Tecnologia, Cultura e Desportos');
+    texto1.x = 50;
+    texto1.y = 30;
+    app.stage.addChild(texto1);
+    app.stage.addChild(di7);
+    di7
+        .on('pointerdown', onDragStart)
+        .on('pointerup', onDragEnd)
+        .on('pointerupoutside', onDragEnd)
+        .on('pointermove', onDragMove);
+    break;
+
+    case 8:
+    app.stage.removeChild(texto1);
+    xcerto=704;
+    ycerto=631;
+    
+    app.stage.removeChild(di6)
+    di6 = new PIXI.Sprite.from(app.loader.resources.di_saltador.texture);
+    di6.x=712;
+    di6.y=542;
+    app.stage.addChild(di6)
+
+    let di8 = new PIXI.Sprite.from(app.loader.resources.di_esps.texture);
+    di8.scale.set(1.3);
+    di8.interactive = true;
+    di8.cursor = 'grab';
+    di8.x=100;
+    di8.y=100;
+    texto1 = new PIXI.Text('Habilidades Escoteiras e Serviços');
+    texto1.x = 50;
+    texto1.y = 30;
+    app.stage.addChild(texto1);
+    app.stage.addChild(di8);
+    di8
+        .on('pointerdown', onDragStart)
+        .on('pointerup', onDragEnd)
+        .on('pointerupoutside', onDragEnd)
+        .on('pointermove', onDragMove);
+    break;
+
+    case 9:
+    app.stage.removeChild(texto1);
+    xcerto=498;
+    ycerto=490;
+
+app.stage.removeChild(di6)
+    di6 = new PIXI.Sprite.from(app.loader.resources.di_rastreador.texture);
+    di6.x=712;
+    di6.y=542;
+    app.stage.addChild(di6)
+
+    let di9 = new PIXI.Sprite.from(app.loader.resources.di_intesp.texture);
+    di9.scale.set(1.3);
+    di9.interactive = true;
+    di9.cursor = 'grab';
+    di9.x=100;
+    di9.y=100;
+    texto1 = new PIXI.Text('Insígnias de Interesse Especial');
+    texto1.x = 50;
+    texto1.y = 30;
+    app.stage.addChild(texto1);
+    app.stage.addChild(di9);
+    di9
+        .on('pointerdown', onDragStart)
+        .on('pointerup', onDragEnd)
+        .on('pointerupoutside', onDragEnd)
+        .on('pointermove', onDragMove);
+    break;
+
+    case 10:
+    app.stage.removeChild(texto1);
+    xcerto=117;
+    ycerto=571;
+    app.stage.removeChild(di6)
+    di6 = new PIXI.Sprite.from(app.loader.resources.di_cacador.texture);
+    di6.x=712;
+    di6.y=542;
+    app.stage.addChild(di6)
+    let di10 = new PIXI.Sprite.from(app.loader.resources.di_csul.texture);
+    di10.scale.set(1.3);
+    di10.interactive = true;
+    di10.cursor = 'grab';
+    di10.x=100;
+    di10.y=100;
+    texto1 = new PIXI.Text('Cruzeiro do Sul');
+    texto1.x = 50;
+    texto1.y = 30;
+    app.stage.addChild(texto1);
+    app.stage.addChild(di10);
+    di10
+        .on('pointerdown', onDragStart)
+        .on('pointerup', onDragEnd)
+        .on('pointerupoutside', onDragEnd)
+        .on('pointermove', onDragMove);
+    break;
+
+    case 11:
+    app.stage.removeChild(texto1);
+    texto1 = new PIXI.Text('Parabéns!');
+    texto1.x = 50;
+    texto1.y = 30;
+    app.stage.addChild(texto1);
+    break;
+    }
+}
+
+
+
+function onDragStart(event) {
+    // store a reference to the data
+    // the reason for this is because of multitouch
+    // we want to track the movement of this particular touch
+    this.data = event.data;
+    this.alpha = 0.5;
+    this.dragging = true;
+}
+
+function onDragEnd() {
+    this.alpha = 1;
+    this.dragging = false;
+    // set the interaction data to null
+    this.data = null;
+    
+     verificapos(this.x, this.y, this);
+       
+}
+
+function onDragMove() {
+    if (this.dragging) {
+        const newPosition = this.data.getLocalPosition(this.parent);
+        this.x = newPosition.x;
+        this.y = newPosition.y;
+    }
+}
+
+function verificapos(xatual, yatual, objeto){
+if(xatual>xcerto-50 && xatual<xcerto+50 && yatual>ycerto-50 && yatual<ycerto+50){
+    rosto.texture=app.loader.resources.feliz.texture;
+    objeto.interactive=false;
+    objeto.scale.set(1);
+    objeto.x=xcerto;
+    objeto.y=ycerto;
+    nivel=nivel+1;
+    fase(nivel);
+    }else{
+    rosto.texture=app.loader.resources.triste.texture;
+    }
+return
+}
+    
+    
+</script>
+</center>
+</body>
+</html>
